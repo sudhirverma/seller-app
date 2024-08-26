@@ -1,12 +1,8 @@
 import mongoose from 'mongoose';
-import { mergedEnvironmentConfig } from '../config/env.config.js';
 
-const config = mergedEnvironmentConfig.mongodb;
-mongoose.connect(`${config.host}/${config.name}`,{
-    useNewUrlParser:true
-});
-
-mongoose.set('debug', (collectionName, method, query, doc) => {
-    console.log(`[MONGOOS]:${collectionName}.${method}`, JSON.stringify(query), doc);
-});
-
+mongoose.connect('mongodb://strapi:strapi@mongo:27017/?authSource=admin', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 90000
+}).then(() => console.log('MongoDB connected successfully'))
+    .catch(err => console.error('MongoDB connection error:', err));
