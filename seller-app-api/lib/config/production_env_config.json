@@ -2,7 +2,7 @@
   "express": {
     "protocol": "http://",
     "useFqdnForApis": false,
-    "ipAddress": "localhost",
+    "ipAddress": "strapi",
     "fqdn": "",
     "port": 3001,
     "apiUrl": ""
@@ -20,10 +20,10 @@
     }
   },
   "database": {
-    "username": "akshay",
-    "password": "",
+    "username": "strapi",
+    "password": "strapi",
     "name": "sellerapp",
-    "host": "localhost",
+    "host": "postgres",
     "port": "5432",
     "dialect": "postgres",
     "pool": {
@@ -59,7 +59,7 @@
   "cors": {
     "whitelistUrls": [
       "http://localhost:3000",
-      "https://localhost:3000"
+      "http://strapi:3001"
     ]
   },
   "directory": {
@@ -71,11 +71,10 @@
     "sameSite": false
   },
   "general": {
-    "exceptionEmailRecipientList": [
-    ]
+    "exceptionEmailRecipientList": []
   },
   "seller": {
-    "serverUrl": "http://localhost:3019"
+    "serverUrl": "http://seller:3008"
   },
   "firebase": {
     "account": ""
@@ -121,14 +120,13 @@
           "country": "India"
         }
       },
-      "contact":
-      {
+      "contact": {
         "phone": "98860 98860",
         "email": "abcd.efgh@gmail.com"
       }
     }
   },
-  "settlement_details":   [
+  "settlement_details": [
     {
       "settlement_counterparty": "buyer-app",
       "settlement_type": "upi",
