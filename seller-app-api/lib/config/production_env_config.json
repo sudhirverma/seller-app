@@ -75,7 +75,7 @@
     ]
   },
   "seller": {
-    "serverUrl": "http://localhost:3019"
+    "serverUrl": "http://localhost:3008"
   },
   "firebase": {
     "account": ""

@@ -180,7 +180,9 @@ class OndcService {
 
         try {
             let searchResponse = await productService.search(searchRequest,searchMessageId)
+            logger.log('info',"#########-----------------NK - log - checkpoint - 3", searchResponse);
             await this.postSearchResponse(searchResponse);
+            logger.log('info',"#########-----------------NK - log - checkpoint - 4");
 
         } catch (e) {
             logger.error('error', `[Ondc Service] search logistics payload - build select request : param :`, e);

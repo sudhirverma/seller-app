@@ -37,14 +37,18 @@ class ProductService {
 
             let headers = {};
 
-            let httpRequest = new HttpRequest(
-                serverUrl,
-                `/api/v1/products/search?name=${searchProduct}&category=${searchCategory}`, //TODO: allow $like query
+            logger.log('info', "NK -Server-URL: ", serverUrl);
+            let httpRequest = new HttpRequest(  
+                ``,
+                `http://seller:3008/api/v1/products/search?name=${searchProduct}&category=${searchCategory}`, //TODO: allow $like query
                 'get',
                 headers
             );
+            logger.log('info', "NK -checkpoint - 1: ", httpRequest);
 
             let result = await httpRequest.send();
+
+            logger.log('info', "NK - checkpoint - 2:");
 
             logger.log('info', `[Product Service] search product : result :`, result.data);
 
@@ -54,6 +58,7 @@ class ProductService {
 
             return productData
         }catch (e) {
+            logger.log('info', "NK - Catch ", e);
             console.log(e)
         }
 
