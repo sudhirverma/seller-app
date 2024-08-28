@@ -50,8 +50,8 @@ class OndcController {
     handler(req, res, next) {
         acknowledgeACK(res, req.body.context);
 
-        ondcService.handler(req, res).then(data => {
-            res.json(data);
+        ondcService.handler(req.body, req).then(data => {
+            console.log(data);
         }).catch((err) => {
             next(err);
         });

@@ -9,13 +9,13 @@ import logger from '../../lib/logger'
 
 class OndcService {
 
-    async handler(req, res) {
-        const requestType = req.body.context.action;
+    async handler(payload = {}, req = {}) {
+        const requestType = payload.context.action;
 
         try {
             switch (requestType) {
                 case 'search':
-                    const result = await this.productSearch(req.body, req);
+                    const result = await this.productSearch(payload, req);
                     return result;
 
                 case 'select':
