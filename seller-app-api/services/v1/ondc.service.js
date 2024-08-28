@@ -319,7 +319,8 @@ class OndcService {
 
             let headers = {};
             let httpRequest = new HttpRequest(
-                config.get("sellerConfig").BPP_URI,
+                // config.get("sellerConfig").BPP_URI,
+                'http://13.233.108.112:6001',
                 `/protocol/v1/on_search`,
                 'POST',
                 searchResponse,
