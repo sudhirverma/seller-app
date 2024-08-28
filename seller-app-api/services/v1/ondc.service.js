@@ -21,7 +21,7 @@ class OndcService {
                 case 'select':
                     return await this.orderSelect(req.body, req);
 
-                case 'Init':
+                case 'init':
                     return await this.orderInit(req.body, req);
 
                 case 'confirm':
@@ -45,10 +45,10 @@ class OndcService {
                 case '/status/updateOrderItems':
                     return await this.handleCancel(req.body, req);
 
-                case '/status/update':
+                case 'update':
                     return await this.orderUpdate(req.body, req);
 
-                case '/status/support':
+                case 'support':
                     return await this.orderSupport(req.body, req);
             }
         } catch (error) {
