@@ -38,8 +38,8 @@ class ProductService {
             let headers = {};
 
             let httpRequest = new HttpRequest(
-                serverUrl,
-                `/api/v1/products/search?name=${searchProduct}&category=${searchCategory}`, //TODO: allow $like query
+                ``,
+                `http://seller:3008/api/v1/products/search?name=${searchProduct}&category=${searchCategory}`, //TODO: allow $like query
                 'get',
                 headers
             );
