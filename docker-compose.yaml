@@ -57,15 +57,15 @@ services:
     #   timeout: 5s
     #   retries: 5
 
-  # mongo:
-  #         image: mongo:latest
-  #         container_name: mongo
-  #         restart: always
-  #         environment:
-  #             MONGO_INITDB_ROOT_USERNAME: strapi
-  #             MONGO_INITDB_ROOT_PASSWORD: strapi
-  #             MONGO_INITDB_DATABASE: sellerAppApi
-  #         ports:
-  #             - 3009:27017
-  #         volumes:
-  #             - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  mongo:
+          image: mongo:latest
+          container_name: mongo
+          restart: always
+          environment:
+              MONGO_INITDB_ROOT_USERNAME: strapi
+              MONGO_INITDB_ROOT_PASSWORD: strapi
+              MONGO_INITDB_DATABASE: sellerAppApi
+          ports:
+              - 3009:27017
+          volumes:
+              - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
