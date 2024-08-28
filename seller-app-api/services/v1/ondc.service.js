@@ -10,7 +10,7 @@ import logger from '../../lib/logger'
 class OndcService {
 
     async handler(req, res) {
-        const requestType = req.body.action;
+        const requestType = req.body.context.action;
 
         try {
             switch (requestType) {

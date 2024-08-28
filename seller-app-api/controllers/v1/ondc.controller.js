@@ -2,9 +2,54 @@ import { OndcService } from '../../services/v1';
 
 const ondcService = new OndcService();
 
+function acknowledge(res, data) {
+    try {
+        res.status(202).json(data);
+    } catch (error) {
+        if (error instanceof Exception) {
+            throw error;
+        }
+
+        throw new Exception(
+            ExceptionType.Acknowledgement_Failed,
+            "Acknowledge to client connection failed",
+            500,
+            error
+        );
+    }
+}
+
+function acknowledgeACK(res, context) {
+    try {
+        const contextData = JSON.parse(JSON.stringify(context));
+        acknowledge(res, {
+            context: contextData,
+            message: {
+                ack: {
+                    status: "ACK"
+                }
+            }
+        });
+    } catch (error) {
+        if (error instanceof Exception) {
+            logger.error(error);
+            throw error;
+        }
+
+        throw new Exception(
+            ExceptionType.Acknowledgement_Failed,
+            "Acknowledge to client connection failed",
+            500,
+            error
+        );
+    }
+}
+
 class OndcController {
 
     handler(req, res, next) {
+        acknowledgeACK(res, req.body.context);
+
         ondcService.handler(req, res).then(data => {
             res.json(data);
         }).catch((err) => {
