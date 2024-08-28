@@ -320,7 +320,7 @@ class OndcService {
             let headers = {};
             let httpRequest = new HttpRequest(
                 // config.get("sellerConfig").BPP_URI,
-                'http://13.233.108.112:6001',
+                'http://openfort-oasp-client.ossverse.com',
                 `/protocol/v1/on_search`,
                 'POST',
                 searchResponse,
