@@ -22,7 +22,7 @@
   "database": {
     "username": "strapi",
     "password": "strapi",
-    "name": "sellerapp",
+    "name": "sellerApp",
     "host": "postgres",
     "port": "5432",
     "dialect": "postgres",

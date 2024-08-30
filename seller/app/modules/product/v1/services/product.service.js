@@ -180,8 +180,10 @@ class ProductService {
 
             console.log('params------->',params);
             const orgs = await Organization.find({},).lean();
+            console.log('orgs------->',orgs);
             let products = [];
             for(const org of orgs){
+                console.log("==================if atleast 1 org is present================");
                 query.organization = org._id;
                 query.published = true;
                 if(params.name){
@@ -190,12 +192,16 @@ class ProductService {
                 if(params.category){
                     query.productCategory ={ $regex: '.*' + params.category + '.*' };
                 }
+                console.log("=============  query =====", query);
                 // query.productName = {$regex: params.message.intent.item.descriptor.name,$options: 'i'}
                 const data = await Product.find(query).sort({createdAt:1}).skip(params.offset).limit(params.limit);
+                console.log("=========== data ======", data);
                 if(data.length>0){
+                    console.log("=========== if data-size > 0 ======", data);
+                    /* 
                     for(const product of data){
                         let productDetails = product;
-                        let images = [];
+                       let images = [];
                         for(const image of productDetails.images){
                             let imageData = await s3.getSignedUrlForRead({path:image});
                             images.push(imageData.url);
@@ -207,12 +213,14 @@ class ProductService {
                             product.backImage ='';
                         }
                         product.images = images;
-                    }
+                        
+                    }*/
                     org.items = data;
                     products.push(org);
                 }
             }
             //collect all store details by
+            console.log("=========== products ======", products);
             return products;
         } catch (err) {
             console.log('[OrderService] [getAll] Error in getting all from organization ',err);
