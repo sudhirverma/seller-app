@@ -5,7 +5,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 data/
+<<<<<<< HEAD
 
+=======
+>>>>>>> neeraj-changes
 # Runtime data
 pids
 *.pid

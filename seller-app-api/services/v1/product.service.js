@@ -37,8 +37,12 @@ class ProductService {
 
             let headers = {};
 
+<<<<<<< HEAD
             logger.log('info', "NK -Server-URL: ", serverUrl);
             let httpRequest = new HttpRequest(  
+=======
+            let httpRequest = new HttpRequest(
+>>>>>>> neeraj-changes
                 ``,
                 `http://seller:3008/api/v1/products/search?name=${searchProduct}&category=${searchCategory}`, //TODO: allow $like query
                 'get',

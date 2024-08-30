@@ -2,7 +2,7 @@
   "express": {
     "protocol": "http://",
     "useFqdnForApis": false,
-    "ipAddress": "localhost",
+    "ipAddress": "strapi",
     "fqdn": "",
     "port": 3001,
     "apiUrl": ""
@@ -20,10 +20,10 @@
     }
   },
   "database": {
-    "username": "akshay",
-    "password": "",
-    "name": "sellerapp",
-    "host": "localhost",
+    "username": "strapi",
+    "password": "strapi",
+    "name": "sellerApp",
+    "host": "postgres",
     "port": "5432",
     "dialect": "postgres",
     "pool": {
@@ -51,17 +51,15 @@
         "path": "/usr/sbin/sendmail"
       }
     },
-    "sender": "dev@wemotiveforge.com",
-    "supportEmail": "dev@wemotiveforge.com",
-    "webClientUri": "http://192.168.0.11:3000"
-  },
-  "cors":  {
-    "whitelistUrls":  ["http://localhost:3000", "http://127.0.0.1:3000"]
+    "sender": "",
+    "supportEmail": "",
+    "webClientUri": "http://34.123.120.224",
+    "shareUrl": "https://www.google.com"
   },
   "cors": {
     "whitelistUrls": [
       "http://localhost:3000",
-      "https://localhost:3000"
+      "http://strapi:3001"
     ]
   },
   "directory": {
@@ -73,11 +71,10 @@
     "sameSite": false
   },
   "general": {
-    "exceptionEmailRecipientList": [
-    ]
+    "exceptionEmailRecipientList": []
   },
   "seller": {
-    "serverUrl": "http://localhost:3008"
+    "serverUrl": "http://seller:3008"
   },
   "firebase": {
     "account": ""
@@ -87,8 +84,6 @@
     "BPP_URI": "https://7e3b-2401-4900-1c5d-2b13-814b-de08-9df3-b44e.ngrok-free.app",
     "BAP_ID": "sellerapp-staging.datasyndicate.in",
     "BAP_URI": "https://7e3b-2401-4900-1c5d-2b13-814b-de08-9df3-b44e.ngrok-free.app",
-    "LOGISTICS_BAP_ID": "dev-ondc.shiprocket.in",
-    "LOGISTICS_DELIVERY_TYPE": "Same Day Delivery",
     "storeOpenSchedule": {
       "time": {
         "days": "1,2,3,4,5,6,7",
@@ -125,14 +120,13 @@
           "country": "India"
         }
       },
-      "contact":
-      {
+      "contact": {
         "phone": "98860 98860",
         "email": "abcd.efgh@gmail.com"
       }
     }
   },
-  "settlement_details":   [
+  "settlement_details": [
     {
       "settlement_counterparty": "buyer-app",
       "settlement_type": "upi",
