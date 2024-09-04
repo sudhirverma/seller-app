@@ -80,30 +80,31 @@ exports.getProducts = async (data) => {
                tags.push(
                 {
                     "code": "serviceability",
-                    "list": [
-                        {
-                            "code": "location",
-                           // "value": org.storeDetails?.location._id??"0"
-                            "value": "0"
-                        },
-                        {
-                            "code": "category",
-                            "value": items.productSubcategory1??"NA"
-                        },
-                        {
-                            "code": "type",
-                            "value": "12" //Enums are "10" - hyperlocal, "11" - intercity, "12" - pan-India
+                    "list": "000"
+                    //     [
+                    //     {
+                    //         "code": "location",
+                    //        // "value": org.storeDetails?.location._id??"0"
+                    //         "value": "0"
+                    //     },
+                    //     {
+                    //         "code": "category",
+                    //         "value": items.productSubcategory1??"NA"
+                    //     },
+                    //     {
+                    //         "code": "type",
+                    //         "value": "12" //Enums are "10" - hyperlocal, "11" - intercity, "12" - pan-India
 
-                        },
-                        {
-                            "code": "val",
-                            "value": "IND"
-                        },
-                        {
-                            "code": "unit",
-                            "value": "country"
-                        }
-                    ]
+                    //     },
+                    //     {
+                    //         "code": "val",
+                    //         "value": "IND"
+                    //     },
+                    //     {
+                    //         "code": "unit",
+                    //         "value": "country"
+                    //     }
+                    // ]
                 })
             productAvailable.push(item)
         }
