@@ -12,10 +12,10 @@ exports.getProducts = async (data) => {
     for(const org of data?.data){
         let tags =[]
         let productAvailable = []
-        org.storeDetails.address.street = org.storeDetails.address.locality
-        delete org.storeDetails.address.locality
-        delete org.storeDetails.address.building
-        delete org.storeDetails.address.country
+        //org.storeDetails.address.street = org.storeDetails.address.locality
+       // delete org.storeDetails.address.locality
+        //delete org.storeDetails.address.building
+        //delete org.storeDetails.address.country
         for(let items of org.items){
             let item =  {
                 "id": items._id,
@@ -40,7 +40,7 @@ exports.getProducts = async (data) => {
                     }
                 },
                 "category_id": items.productSubcategory1??"NA",
-                "location_id": org.storeDetails?.location._id??"0",
+               // "location_id": org.storeDetails?.location._id??"0",
                 "fulfillment_id": '1',//Delivery
                 "matched": true,
                 "@ondc/org/returnable":  items.isReturnable??false,
@@ -49,7 +49,7 @@ exports.getProducts = async (data) => {
                 "@ondc/org/time_to_ship": "PT1H", //TODO: hard coded
                 "@ondc/org/seller_pickup_return": true,
                 "@ondc/org/return_window": items.returnWindow,
-                "@ondc/org/contact_details_consumer_care": `${org.name},${org.storeDetails.supportDetails.email},${org.storeDetails.supportDetails.mobile}`,
+                //"@ondc/org/contact_details_consumer_care": `${org.name},${org.storeDetails.supportDetails.email},${org.storeDetails.supportDetails.mobile}`,
                 "@ondc/org/mandatory_reqs_veggies_fruits": {
                     "net_quantity": items.packQty
                 },
@@ -83,7 +83,8 @@ exports.getProducts = async (data) => {
                     "list": [
                         {
                             "code": "location",
-                            "value": org.storeDetails?.location._id??"0"
+                           // "value": org.storeDetails?.location._id??"0"
+                            "value": "0"
                         },
                         {
                             "code": "category",
@@ -117,7 +118,8 @@ exports.getProducts = async (data) => {
             ]
         },
         bppProviders.push(            {
-            "id": org._id,
+           // "id": org._id,
+            "id": "12-12-44",
             "descriptor": {
                 "name": org.name,
                 "symbol": org.storeDetails.logo,
@@ -134,7 +136,8 @@ exports.getProducts = async (data) => {
                 },
             "locations": [
                 {
-                    "id": org.storeDetails?.location._id??"0", //org.storeDetails.location._id
+                   // "id": org.storeDetails?.location._id??"0", //org.storeDetails.location._id
+                    "id": "123-123",
                     "gps": `${org.storeDetails?.location?.lat??"0"},${org.storeDetails?.location?.long??"0"}`,
                     "address":{
                         "city": org.storeDetails?.address?.city??"NA",
@@ -177,8 +180,10 @@ exports.getProducts = async (data) => {
                     {
                         "contact":
                             {
-                                "phone":org.storeDetails.supportDetails.mobile,
-                                "email":org.storeDetails.supportDetails.email
+                                //"phone":org.storeDetails.supportDetails.mobile,
+                                "phone":"8197511885",
+                               // "email":org.storeDetails.supportDetails.email
+                                "email":"neeraj.kumar@gmail.com"
                             }
                     }
                 ],
