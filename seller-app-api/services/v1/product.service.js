@@ -380,14 +380,14 @@ class ProductService {
         // headers['Authorization'] = `Bearer ${strapiAccessToken}`;
 
         let httpRequest = new HttpRequest(
-            serverUrl,
+            'http://seller:3008',
             `/api/v1/products/${id}/ondcGet`,
             'get',
             {},
             headers
         );
-
         let result = await httpRequest.send();
+        console.log('#########################################################', result.data)
 
         return result.data
     }
@@ -398,7 +398,7 @@ class ProductService {
         // headers['Authorization'] = `Bearer ${strapiAccessToken}`;
 
         let httpRequest = new HttpRequest(
-            serverUrl,
+            'http://seller:3008',
             `/api/v1/organizations/${id}/ondcGet`,
             'get',
             {},
@@ -406,6 +406,7 @@ class ProductService {
         );
 
         let result = await httpRequest.send();
+        console.log('#########################################################1', result.data)
 
         return result.data
     }

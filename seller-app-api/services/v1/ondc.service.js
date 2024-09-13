@@ -171,7 +171,7 @@ class OndcService {
             try {
                 let headers = {};
                 let httpRequest = new HttpRequest(
-                    config.get("sellerConfig").BPP_URI,
+                    'http://openfort-oasp.ossverse.com',
                     `/protocol/logistics/v1/search`,
                     'POST',
                     searchRequest,
@@ -189,10 +189,10 @@ class OndcService {
             //2. wait async to fetch logistics responses
 
             //async post request
-            setTimeout(() => {
-                logger.log('info', `[Ondc Service] search logistics payload - timeout : param :`, searchRequest);
-                this.buildSelectRequest(logisticsMessageId, selectMessageId)
-            }, 10000); //TODO move to config
+            // setTimeout(() => {
+            //     logger.log('info', `[Ondc Service] search logistics payload - timeout : param :`, searchRequest);
+            //     this.buildSelectRequest(logisticsMessageId, selectMessageId)
+            // }, 10000); //TODO move to config
         } catch (e) {
             logger.error('error', `[Ondc Service] post http select response : `, e);
             return e
