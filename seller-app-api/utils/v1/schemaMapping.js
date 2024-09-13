@@ -119,8 +119,8 @@ exports.getProducts = async (data) => {
             ]
         },
         bppProviders.push(            {
-           // "id": org._id,
-            "id": "12-12-44",
+           "id": org._id,
+            // "id": "12-12-44",
             "descriptor": {
                 "name": org.name,
                 "symbol": org.storeDetails.logo,
