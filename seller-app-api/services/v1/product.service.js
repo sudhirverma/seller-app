@@ -43,7 +43,7 @@ class ProductService {
                 'get',
                 headers
             );
-
+            console.log("########################################################search ")
             let result = await httpRequest.send();
 
             logger.log('info', `[Product Service] search product : result :`, result.data);
