@@ -93,10 +93,11 @@ class OndcService {
             }
 
             let org = await productService.getOrgForOndc(payload.message.order.provider.id);
+            console.log("########################################payload", JSON.stringify(payload));
 
             if (org.providerDetail.storeDetails) {
                 storeLocationEnd = {
-                    gps: `${org?.providerDetail?.storeDetails?.location.lat},${org?.providerDetail?.storeDetails?.location?.long}`,
+                    gps: `${org?.providerDetail?.storeDetails?.location?.lat},${org?.providerDetail?.storeDetails?.location?.long}`,
                     address: {
                         area_code: org?.providerDetail?.storeDetails?.address?.area_code
                     }
@@ -363,21 +364,21 @@ class OndcService {
             if (org.providerDetail.storeDetails) {
                 storeLocationEnd = {
                     location: {
-                        gps: `${org.providerDetail.storeDetails.location.lat},${org.providerDetail.storeDetails.location.long}`,
+                        gps: `${org?.providerDetail?.storeDetails?.location?.lat},${org?.providerDetail?.storeDetails?.location?.long}`,
                         address: {
-                            area_code: org.providerDetail.storeDetails.address.area_code,
-                            name: org.providerDetail.name,
-                            building: org.providerDetail.storeDetails.address.building,
-                            locality: org.providerDetail.storeDetails.address.locality,
-                            city: org.providerDetail.storeDetails.address.city,
-                            state: org.providerDetail.storeDetails.address.state,
-                            country: org.providerDetail.storeDetails.address.country
+                            area_code: org?.providerDetail?.storeDetails?.address?.area_code,
+                            name: org?.providerDetail?.name,
+                            building: org?.providerDetail?.storeDetails?.address?.building,
+                            locality: org?.providerDetail?.storeDetails?.address?.locality,
+                            city: org?.providerDetail?.storeDetails?.address?.city,
+                            state: org?.providerDetail?.storeDetails?.address?.state,
+                            country: org?.providerDetail?.storeDetails?.address?.country
                         }
                     },
                     contact:
                     {
-                        phone: org.providerDetail.storeDetails.supportDetails.mobile,
-                        email: org.providerDetail.storeDetails.supportDetails.email
+                        phone: org?.providerDetail?.storeDetails?.supportDetails?.mobile,
+                        email: org?.providerDetail?.storeDetails?.supportDetails?.email
                     }
                 }
             }
