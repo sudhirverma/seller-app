@@ -96,9 +96,9 @@ class OndcService {
 
             if (org.providerDetail.storeDetails) {
                 storeLocationEnd = {
-                    gps: `${org.providerDetail.storeDetails.location.lat},${org.providerDetail.storeDetails.location.long}`,
+                    gps: `${org?.providerDetail?.storeDetails?.location.lat},${org?.providerDetail?.storeDetails?.location?.long}`,
                     address: {
-                        area_code: org.providerDetail.storeDetails.address.area_code
+                        area_code: org?.providerDetail?.storeDetails?.address?.area_code
                     }
                 }
             }
