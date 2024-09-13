@@ -103,58 +103,58 @@ class OndcService {
                 }
             }
 
-            const searchRequest = {
-                "context": {
-                    "domain": "nic2004:60232",
-                    "country": "IND",
-                    "city": "std:080",
-                    "action": "search",
-                    "core_version": "1.1.0",
-                    "bap_id": config.get("sellerConfig").BPP_ID,
-                    "bap_uri": config.get("sellerConfig").BPP_URI,
-                    "transaction_id": uuidv4(),
-                    "message_id": logisticsMessageId,
-                    "timestamp": new Date(),
-                    "ttl": "PT30S"
-                },
-                "message": {
-                    "intent": {
-                        "category": {
-                            "id": "Standard Delivery" //TODO: based on provider it should change
-                        },
-                        "provider": {
-                            "time": { //TODO: HARD Coded
-                                "days": "1,2,3,4,5,6,7",
-                                "range": {
-                                    "end": "2359",
-                                    "start": "0000"
-                                }
-                            }
-                        },
-                        "fulfillment": {
-                            "type": "Prepaid", //TODO: ONLY prepaid orders should be there
-                            "start": {
-                                "location": storeLocationEnd
-                            },
-                            "end": payload.message.order.fulfillments[0].end
-                        },
-                        "@ondc/org/payload_details": { //TODO: HARD coded
-                            "weight": {
-                                "unit": "Kilogram",
-                                "value": 10
-                            },
-                            "category": "Grocery", //TODO: @abhinandan Take it from Product schema
-                            "value": {
-                                "currency": "INR",
-                                "value": `${totalProductValue}`
-                            }
-                        }
-                    }
-                }
-            }
+            // const searchRequest = {
+            //     "context": {
+            //         "domain": "nic2004:60232",
+            //         "country": "IND",
+            //         "city": "std:080",
+            //         "action": "search",
+            //         "core_version": "1.1.0",
+            //         "bap_id": config.get("sellerConfig").BPP_ID,
+            //         "bap_uri": config.get("sellerConfig").BPP_URI,
+            //         "transaction_id": uuidv4(),
+            //         "message_id": logisticsMessageId,
+            //         "timestamp": new Date(),
+            //         "ttl": "PT30S"
+            //     },
+            //     "message": {
+            //         "intent": {
+            //             "category": {
+            //                 "id": "Standard Delivery" //TODO: based on provider it should change
+            //             },
+            //             "provider": {
+            //                 "time": { //TODO: HARD Coded
+            //                     "days": "1,2,3,4,5,6,7",
+            //                     "range": {
+            //                         "end": "2359",
+            //                         "start": "0000"
+            //                     }
+            //                 }
+            //             },
+            //             "fulfillment": {
+            //                 "type": "Prepaid", //TODO: ONLY prepaid orders should be there
+            //                 "start": {
+            //                     "location": storeLocationEnd
+            //                 },
+            //                 "end": payload.message.order.fulfillments[0].end
+            //             },
+            //             "@ondc/org/payload_details": { //TODO: HARD coded
+            //                 "weight": {
+            //                     "unit": "Kilogram",
+            //                     "value": 10
+            //                 },
+            //                 "category": "Grocery", //TODO: @abhinandan Take it from Product schema
+            //                 "value": {
+            //                     "currency": "INR",
+            //                     "value": `${totalProductValue}`
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
 
             //process select request and send it to protocol layer
-            this.postSelectRequest(searchRequest, logisticsMessageId, selectMessageId)
+            this.postSelectRequest(payload)
 
             return searchRequest
         } catch (err) {
@@ -163,35 +163,35 @@ class OndcService {
         }
     }
 
-    async postSelectRequest(searchRequest, logisticsMessageId, selectMessageId) {
+    async postSelectRequest(payload) {
 
         try {
             //1. post http to protocol/logistics/v1/search
 
-            try {
-                let headers = {};
-                let httpRequest = new HttpRequest(
-                    config.get("sellerConfig").BPP_URI,
-                    `/protocol/logistics/v1/search`,
-                    'POST',
-                    searchRequest,
-                    headers
-                );
+            // try {
+            //     let headers = {};
+            //     let httpRequest = new HttpRequest(
+            //         config.get("sellerConfig").BPP_URI,
+            //         `/protocol/logistics/v1/search`,
+            //         'POST',
+            //         searchRequest,
+            //         headers
+            //     );
 
 
-                await httpRequest.send();
+            //     await httpRequest.send();
 
-            } catch (e) {
-                logger.error('error', `[Ondc Service] post http select response : `, e);
-                return e
-            }
+            // } catch (e) {
+            //     logger.error('error', `[Ondc Service] post http select response : `, e);
+            //     return e
+            // }
 
             //2. wait async to fetch logistics responses
 
             //async post request
             setTimeout(() => {
                 logger.log('info', `[Ondc Service] search logistics payload - timeout : param :`, searchRequest);
-                this.buildSelectRequest(logisticsMessageId, selectMessageId)
+                this.buildSelectRequest(payload)
             }, 10000); //TODO move to config
         } catch (e) {
             logger.error('error', `[Ondc Service] post http select response : `, e);
@@ -199,14 +199,14 @@ class OndcService {
         }
     }
 
-    async buildSelectRequest(logisticsMessageId, selectMessageId) {
+    async buildSelectRequest(payload) {
 
         try {
             logger.log('info', `[Ondc Service] search logistics payload - build select request : param :`, { logisticsMessageId, selectMessageId });
             //1. look up for logistics
-            let logisticsResponse = await this.getLogistics(logisticsMessageId, selectMessageId, 'select')
+            // let logisticsResponse = await this.getLogistics(logisticsMessageId, selectMessageId, 'select')
             //2. if data present then build select response
-            let selectResponse = await productService.productSelect(logisticsResponse)
+            let selectResponse = await productService.productSelect(payload)
             //3. post to protocol layer
             await this.postSelectResponse(selectResponse);
 
@@ -293,8 +293,8 @@ class OndcService {
 
             let headers = {};
             let httpRequest = new HttpRequest(
-                config.get("sellerConfig").BPP_URI,
-                `/protocol/v1/on_select`,
+                'http://openfort-oasp.ossverse.com',
+                `/on_select`,
                 'POST',
                 selectResponse,
                 headers
