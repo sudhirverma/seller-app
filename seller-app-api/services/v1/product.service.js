@@ -1213,7 +1213,7 @@ class ProductService {
                 let itemLevelQtyStatus = true
                 let qouteItemsDetails = {}
                 let httpRequest = new HttpRequest(
-                    'http://seller:3008',
+                    `http://seller:3008`,
                     `/api/v1/products/${item.id}/ondcGet`,
                     'get',
                     {},

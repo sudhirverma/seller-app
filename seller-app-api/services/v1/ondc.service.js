@@ -293,7 +293,7 @@ class OndcService {
 
             let headers = {};
             let httpRequest = new HttpRequest(
-                'http://openfort-oasp.ossverse.com',
+                `http://openfort-oasp.ossverse.com`,
                 `/select`,
                 'POST',
                 selectResponse,
@@ -320,7 +320,7 @@ class OndcService {
             let headers = {};
             let httpRequest = new HttpRequest(
                 // config.get("sellerConfig").BPP_URI,
-                'http://openfort-oasp-client.ossverse.com',
+                `http://openfort-oasp-client.ossverse.com`,
                 `/on_search`,
                 'POST',
                 searchResponse,
